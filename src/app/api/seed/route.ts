@@ -12,12 +12,12 @@ export async function GET(request: Request) {
         },
         {
           description: "piedra de agua",
-          complete: true,
+          complete: false,
         },
 
         {
           description: "piedra de tierra",
-          complete: true,
+          complete: false,
         },
 
         {

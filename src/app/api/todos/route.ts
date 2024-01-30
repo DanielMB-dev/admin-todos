@@ -31,3 +31,18 @@ export async function POST(req: Request) {
   }
 }
 
+export async function DELETE(req: Request) {
+  try {
+  
+   const result = await prisma.todo.deleteMany({ where: { complete: true } });
+    if (result.count > 0) {
+      return NextResponse.json('Borrados');
+    }
+    else {
+      return NextResponse.json('No se borró nada')
+    }
+  } catch (error) {
+    return NextResponse.json(error, { status: 400 });
+  }
+}
+
