@@ -1,4 +1,6 @@
-import React from 'react'
+import { cookies } from "next/headers";
+import Link from "next/link";
+import React from "react";
 import {
   CiBellOn,
   CiBookmarkCheck,
@@ -7,8 +9,20 @@ import {
   CiMenuBurger,
   CiSearch,
 } from "react-icons/ci";
+import { IoBasket, IoBasketOutline } from "react-icons/io5";
+
+const getTotalCount = (totalArray: number[]) => {
+  return totalArray.reduce((item: number, acc) => item + (acc as number), 0);
+};
 
 export const TopMenu = () => {
+  const cookieStore = cookies();
+  const cart = cookieStore.get("cart");
+  let total = 0;
+  if (cart) {
+    total = getTotalCount(Object.values(JSON.parse(cart.value)));
+  }
+
   return (
     <div className="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
       <div className="px-6 flex items-center justify-between space-x-4">
@@ -40,11 +54,15 @@ export const TopMenu = () => {
           <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
             <CiChat1 size={25} />
           </button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-            <CiBellOn size={25} />
-          </button>
+          <Link
+            href={"/dashboard/cart"}
+            className="flex items-center justify-evenly w-20 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200"
+          >
+            <span className="">{total}</span>
+            <IoBasketOutline size={25} />
+          </Link>
         </div>
       </div>
     </div>
   );
-}
+};

@@ -3,10 +3,10 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-interface Props{
-    icon: React.ReactNode
-    path: string
-    title: string
+interface Props {
+  icon: React.ReactNode;
+  path: string;
+  title: string;
 }
 
 export const SidebarItem = ({ icon, path, title }: Props) => {
@@ -23,7 +23,7 @@ export const SidebarItem = ({ icon, path, title }: Props) => {
           }`}
         >
           {icon}
-          <span className="-mr-1 font-medium">{title}</span>
+          <span className="-mr-1 font-medium text-sm">{title}</span>
         </Link>
       </li>
     </>
